@@ -8,17 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var mocks_1 = require('./mocks');
 var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
 var RacingDataService = (function () {
-    function RacingDataService() {
+    function RacingDataService(http) {
+        this.http = http;
+        this.url = "app/car-parts/car-parts.json";
     }
     RacingDataService.prototype.getCarParts = function () {
-        return mocks_1.CARPARTS;
+        // .get returns an observable, which allows us to treat the
+        // return val like an array, so we can use .map
+        // .data: the array we want is under this keyword
+        // response.json(): for each response, turn it into json
+        // <CarPart[]>: treat this like an array of CarParts
+        return this.http.get(this.url)
+            .map(function (response) { return response.json().data; });
     };
     RacingDataService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], RacingDataService);
     return RacingDataService;
 }());

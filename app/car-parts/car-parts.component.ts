@@ -1,4 +1,4 @@
-// helps create components (decorator + class)
+3// helps create components (decorator + class)
 import { Component } from '@angular/core';
 import { CarPart } from './car-part.ts';
 import { RacingDataService } from './racing-data.service';
@@ -26,15 +26,19 @@ export class CarPartsComponent {
 	constructor(private racingDataService: RacingDataService) {}
 
 	ngOnInit() {
-		let racingDataService = new RacingDataService();
-		this.carParts = this.racingDataService.getCarParts();
+		// set local this.carParts array equal to data we received 
+		// from the service
+		this.racingDataService.getCarParts()
+				.subscribe(carParts => this.carParts = carParts);
 	}
 
 	totalCarParts() {
 		let sum = 0;
 
-		for(let carPart of this.carParts) {
-			sum += carPart.inStock;
+		if (Array.isArray(this.carParts)) {
+			for(let carPart of this.carParts) {
+				sum += carPart.inStock;
+			}
 		}
 
 		return sum;

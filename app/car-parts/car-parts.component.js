@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-// helps create components (decorator + class)
+3; // helps create components (decorator + class)
 var core_1 = require('@angular/core');
 var racing_data_service_1 = require('./racing-data.service');
 var CarPartsComponent = (function () {
@@ -22,14 +22,19 @@ var CarPartsComponent = (function () {
         this.date = new Date('2512-07-03T20:00:00');
     }
     CarPartsComponent.prototype.ngOnInit = function () {
-        var racingDataService = new racing_data_service_1.RacingDataService();
-        this.carParts = this.racingDataService.getCarParts();
+        var _this = this;
+        // set local this.carParts array equal to data we received 
+        // from the service
+        this.racingDataService.getCarParts()
+            .subscribe(function (carParts) { return _this.carParts = carParts; });
     };
     CarPartsComponent.prototype.totalCarParts = function () {
         var sum = 0;
-        for (var _i = 0, _a = this.carParts; _i < _a.length; _i++) {
-            var carPart = _a[_i];
-            sum += carPart.inStock;
+        if (Array.isArray(this.carParts)) {
+            for (var _i = 0, _a = this.carParts; _i < _a.length; _i++) {
+                var carPart = _a[_i];
+                sum += carPart.inStock;
+            }
         }
         return sum;
     };

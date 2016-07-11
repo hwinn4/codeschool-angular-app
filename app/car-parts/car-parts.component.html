@@ -9,7 +9,6 @@
 		<p class="price">{{carPart.price | currency:'USD':true}}</p>
 		<div class="select-quantity">
 			<button class="decrease" (click)="downQuantity(carPart)">-</button>
-			<!-- {{carPart.quantity}} -->
 			<input class="number" type="text" [(ngModel)]="carPart.quantity">
 			<button class="increase" (click)="upQuantity(carPart)">+</button>
 		</div>

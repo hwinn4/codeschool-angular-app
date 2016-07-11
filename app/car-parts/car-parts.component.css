@@ -1,7 +1,17 @@
 .description {
 	color: #e22525;
 	font-size: small;
-},
+}
+
 .price {
-	font-size: 30px;
+	font-weight: bold;
+}
+
+.featured {
+	background: #9eabc5;
+}
+
+img {
+	height: 50px;
+	width: 50px;
 }

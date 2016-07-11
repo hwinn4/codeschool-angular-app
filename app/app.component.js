@@ -10,7 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 // helps create components (decorator + class)
-var car_parts_component_1 = require('./car-parts.component');
+var car_parts_component_1 = require('./car-parts/car-parts.component');
+var racing_data_service_1 = require('./car-parts/racing-data.service');
 var AppComponent = (function () {
     function AppComponent() {
         // don't use var or let to declare class properties
@@ -20,7 +21,8 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             template: "<h1>{{title}}</h1>\n\t\t<h3>{{date | date:'MMM d, y, h:mm a'}}</h3>\n\t\t<car-parts></car-parts>",
-            directives: [car_parts_component_1.CarPartsComponent]
+            directives: [car_parts_component_1.CarPartsComponent],
+            providers: [racing_data_service_1.RacingDataService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

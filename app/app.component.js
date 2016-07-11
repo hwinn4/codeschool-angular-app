@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
 // helps create components (decorator + class)
+var core_1 = require('@angular/core');
 var car_parts_component_1 = require('./car-parts/car-parts.component');
 var racing_data_service_1 = require('./car-parts/racing-data.service');
+var http_1 = require('@angular/http');
 var AppComponent = (function () {
     function AppComponent() {
         // don't use var or let to declare class properties
@@ -22,7 +23,7 @@ var AppComponent = (function () {
             selector: 'my-app',
             template: "<h1>{{title}}</h1>\n\t\t<h3>{{date | date:'MMM d, y, h:mm a'}}</h3>\n\t\t<car-parts></car-parts>",
             directives: [car_parts_component_1.CarPartsComponent],
-            providers: [racing_data_service_1.RacingDataService]
+            providers: [racing_data_service_1.RacingDataService, http_1.HTTP_PROVIDERS]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

@@ -8,14 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+// helps create components (decorator + class)
 var core_1 = require('@angular/core');
-var mocks_ts_1 = require('./mocks.ts');
+var racing_data_service_1 = require('./racing-data.service');
 var CarPartsComponent = (function () {
-    function CarPartsComponent() {
+    // 'private' causes TypeScript to define 
+    // component properties based on the parameters
+    // The parameters here use TypeScript syntax
+    // The params identify that the RacingDataService should be
+    // injected into this component.
+    function CarPartsComponent(racingDataService) {
+        this.racingDataService = racingDataService;
         this.date = new Date('2512-07-03T20:00:00');
     }
     CarPartsComponent.prototype.ngOnInit = function () {
-        this.carParts = mocks_ts_1.CARPARTS;
+        var racingDataService = new racing_data_service_1.RacingDataService();
+        this.carParts = this.racingDataService.getCarParts();
     };
     CarPartsComponent.prototype.totalCarParts = function () {
         var sum = 0;
@@ -39,7 +47,7 @@ var CarPartsComponent = (function () {
             templateUrl: 'app/car-parts/car-parts.component.html',
             styleUrls: ['app/car-parts/car-parts.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [racing_data_service_1.RacingDataService])
     ], CarPartsComponent);
     return CarPartsComponent;
 }());

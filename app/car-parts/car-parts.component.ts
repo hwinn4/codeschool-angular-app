@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 // helps create components (decorator + class)
+import { Component } from '@angular/core';
 import { CarPart } from './car-part.ts';
-import { CARPARTS } from './mocks.ts';
+import { RacingDataService } from './racing-data.service';
 
 @Component({
 	selector: 'car-parts',
@@ -10,16 +10,24 @@ import { CARPARTS } from './mocks.ts';
 })
 
 export class CarPartsComponent {
-
-	date = new Date('2512-07-03T20:00:00');
-
 	// treat this array of objects like an array of CarPart objects
 	// Using the class will prompt the compiler to check for 
 	// correctly named attributes and adherence to the class structure
 	carParts: CarPart[];
 
+	date = new Date('2512-07-03T20:00:00');
+
+	// 'private' causes TypeScript to define 
+	// component properties based on the parameters
+
+	// The parameters here use TypeScript syntax
+	// The params identify that the RacingDataService should be
+	// injected into this component.
+	constructor(private racingDataService: RacingDataService) {}
+
 	ngOnInit() {
-		this.carParts = CARPARTS;
+		let racingDataService = new RacingDataService();
+		this.carParts = this.racingDataService.getCarParts();
 	}
 
 	totalCarParts() {
